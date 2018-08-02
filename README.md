@@ -9,8 +9,8 @@ Objectives: Determine if hyper-parameter testing will result in a natively-coded
  - Number and size of hidden layers 
  - Number of iterations
 Technical details:
- - Modelling problem: binary classification, predicting whether a car is “acceptable” for purchase
- - Data: Car Evaluation data set (1728 labelled records, 6 attributes) from UCI Machine Learning Repository*
+ - Modeling problem: binary classification, predicting whether a car is “acceptable” for purchase
+ - Data: Car Evaluation data set (1728 labeled records, 6 attributes) from UCI Machine Learning Repository*
  - Language: Python 3.6 (Anaconda 4.4 distribution)
  Algorithms/packages:
  - Scikit-learn: DecisionTreeCalssifier, MLPClassifier 
