@@ -1,5 +1,7 @@
 Experimentation with Natively Coded ANN
+
 Author: Halsey Lea
+
 Date: August, 2018
 
 
