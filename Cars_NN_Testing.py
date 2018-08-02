@@ -15,12 +15,13 @@ import pdb
 
 def create_data_set():
     '''
-    Create training and testing set from UCI Car Evaluation dataset:
+    Create training and testing set originally from UCI Car Evaluation dataset:
         https://archive.ics.uci.edu/ml/datasets/Car+Evaluation
+    Exact copy of dataset currently stored in following project github directory as Cars_Sample_DataSet_UCI.txt:
+        https://github.com/hlea/ANN_experimentation
     '''
-    cars = pd.read_csv(
-    'C:\\Users\\hlea\\Documents\\Portfolio Fit\\Audit\\Cars_Sample_DataSet_UCI.txt',
-                               sep= ',')
+    url = 'https://raw.github.com/hlea/ANN_experimentation/master/Cars_Sample_DataSet_UCI.txt'
+    cars = pd.read_csv(url)
     
     #separate input vars and convert to dummies
     cars_input = cars[['buying', 'maint','persons', 'doors', 'lug_boot', 'safety']]
@@ -28,7 +29,7 @@ def create_data_set():
     X = cars_input_dum.values[:,:]
     
     
-    cars['label']=cars['class'].apply(lambda x: make_lable(x))
+    cars['label']=cars['class'].apply(lambda x: make_label(x))
     Y = cars.values[:,7]
     Y = Y.astype('int')
     
@@ -36,11 +37,11 @@ def create_data_set():
     X_train, X_test, y_train, y_test = train_test_split( X, Y, test_size = 0.2, random_state = 100)
     return X_train, X_test, y_train, y_test
 
-    #transform label
-def make_lable(x):
+
+def make_label(x):
     '''This is a convenience function that transforms the multi-class label into a binary lable
     Logic: If the car is 'unacceptable', then 0; else if it's labelled as 'acceptable', 'good', or 'very good', then 1'''
-    if x== 'unacc':
+    if x == 'unacc':
         return 0.0
     return 1.0
 
@@ -165,7 +166,7 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = create_data_set()
     nn_structure = [21, 10, 1]
     act_function ='sigmoid'
-    W, b, avg_cost_func = train_nn(nn_structure, act_function, X_train, y_train, iter_num=1000)
+    W, b, avg_cost_func = train_nn(nn_structure, act_function, X_train, y_train, iter_num=500, alpha=0.1)
     
     plt.plot(avg_cost_func)
     plt.ylabel('Average Cost')

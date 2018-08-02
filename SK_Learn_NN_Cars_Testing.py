@@ -15,15 +15,21 @@ from sklearn.cross_validation import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, average_precision_score 
 
+import sys
+ 
+for p in sys.path:
+    print(p)
+
 
 def create_data_set():
     '''
-    Create training and testing set from UCI Car Evaluation dataset:
+    Create training and testing set originally from UCI Car Evaluation dataset:
         https://archive.ics.uci.edu/ml/datasets/Car+Evaluation
+    Exact copy of dataset currently stored in following project github directory as Cars_Sample_DataSet_UCI.txt:
+        https://github.com/hlea/ANN_experimentation
     '''
-    cars = pd.read_csv(
-    'C:\\Users\\hlea\\Documents\\Portfolio Fit\\Audit\\Cars_Sample_DataSet_UCI.txt',
-                               sep= ',')
+    url = 'https://raw.github.com/hlea/ANN_experimentation/master/Cars_Sample_DataSet_UCI.txt'
+    cars = pd.read_csv(url)
     
     #separate input vars and convert to dummies
     cars_input = cars[['buying', 'maint','persons', 'doors', 'lug_boot', 'safety']]
@@ -39,7 +45,7 @@ def create_data_set():
     X_train, X_test, y_train, y_test = train_test_split( X, Y, test_size = 0.2, random_state = 100)
     return X_train, X_test, y_train, y_test
 
-    #transform label
+
 def make_lable(x):
     '''This is a convenience function that transforms the multi-class label into a binary lable
     Logic: If the car is 'unacceptable', then 0; else if it's labelled as 'acceptable', 'good', or 'very good', then 1'''
@@ -72,8 +78,8 @@ def train_score_ann(layers, act_func, solv):
         
 if __name__ == "__main__":
   
-    train_score_ann((10,),'tanh', 'sgd')
-    train_score_ann((10,), 'relu', 'adam')
+    train_score_ann((15,),'tanh', 'sgd')
+    train_score_ann((60,), 'relu', 'adam')
 
    
 
